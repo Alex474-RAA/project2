@@ -1,5 +1,5 @@
 from typing import List, Dict
-
+from datetime import datetime
 
 def filter_by_state(transactions: List[Dict], state: str = 'EXECUTED') -> List[Dict]:
     """
@@ -16,11 +16,19 @@ def filter_by_state(transactions: List[Dict], state: str = 'EXECUTED') -> List[D
         >>> filter_by_state([{'state': 'EXECUTED'}], 'EXECUTED')
         [{'state': 'EXECUTED'}]
     """
-    return [t for t in transactions if t.get('state') == state]
+    #return [t for t in transactions if t.get('state') == state]
+    if not isinstance(dictionary_list, list):
+        raise TypeError("Неверный тип данных")
+    result_list = []
+    for item in dictionary_list:
+        if not isinstance(item, dict):
+            raise TypeError("Неверный тип данных")
+        if "state" not in item:
+            raise ValueError("Значение для фильтрации  отсутствует в исходных данных")
+        if item["state"] == state:
+            result_list.append(item)
 
-
-from typing import List, Dict
-from datetime import datetime
+    return result_list
 
 
 def sort_by_date(transactions: List[Dict], reverse: bool = True) -> List[Dict]:

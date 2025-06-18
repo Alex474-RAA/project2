@@ -17,10 +17,6 @@ def get_mask_card_number(card_number: str) -> str:
     return masked_number
 
 
-
-
-
-
 def get_mask_account(account_number: str) -> str:
     # Удаляем пробелы (если есть) и проверяем, что номер состоит из цифр
     cleaned_number = account_number.replace(" ", "")

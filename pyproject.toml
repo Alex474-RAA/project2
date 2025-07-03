@@ -51,3 +51,8 @@ mypy = "^1.15.0"
 black = "^25.1.0"
 isort = "^6.0.1"
 
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.1"
+pytest-cov = "^6.2.1"
+

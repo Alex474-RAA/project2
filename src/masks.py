@@ -9,7 +9,7 @@ def get_mask_card_number(card_number: str) -> str:
     last_part = cleaned_number[-4:]
 
     # Маскируем среднюю часть (6*)
-    masked_part = "**** **"
+    masked_part = "** ****"
 
     # Формируем итоговую строку
     masked_number = f"{first_part[:4]} {first_part[4:6]}{masked_part} {last_part}"
@@ -27,6 +27,3 @@ def get_mask_account(account_number: str) -> str:
     masked_account = f"**{cleaned_number[-4:]}"
 
     return masked_account
-
-
-

@@ -1,29 +1,63 @@
 from datetime import datetime
-from .masks import mask_card, mask_account
+
+#from scr.decorators import log
+from src.masks import get_mask_account, get_mask_card_number
 
 
-def mask_account_card(input_str: str) -> str:
+ #@log(filename="mylog.txt")
+def mask_account_card(number_card_or_account: str) -> str:
     """
-    Маскирует номер карты/счета в строке формата:
-    'Visa Platinum 7000792289606361' → 'Visa Platinum 7000 79** **** 6361'
-    'Счет 73654108430135874305' → 'Счет **4305'
-    """
-    parts = input_str.split()
-    number = parts[-1]
+    Принимает строку с номером карты или счета, определяет номер это или счет, накладывает нужную маску,
+    возвращает строку с наложенной маской.
 
-    if "счет" in input_str.lower():
-        return ' '.join(parts[:-1] + [mask_account(number)])
+    :param number_card_or_account: Номер карты или счета.
+    :return: Возвращает строку с наложенной маской на номер карты или счета.
+    """
+
+    # Извлекаем номер.
+    number = " ".join(number_card_or_account.split()[-1:])
+
+    # Накладывает маску на номер карты и выводит строку.
+    if len(number) == 16:
+        mask_card = get_mask_card_number(number)
+        name_card = " ".join(number_card_or_account.split()[:-1])
+        return f"{name_card} {mask_card}"
+
+    # Накладывает маску на номер счет и выводит строку.
+    elif len(number) == 20:
+        mask_account = get_mask_account(number)
+        return f"Счет {mask_account}"
+
+    # Проверка на корректность данных.
     else:
-        return ' '.join(parts[:-1] + [mask_card(number)])
+        raise ValueError("Не удалось определить формат(карта или счет) или недопустимая длина")
 
 
-def get_date(date_str: str) -> str:
+# @log(filename="mylog.txt")
+def get_date(date_iso: str) -> str:
     """
-    Преобразует дату из строки в формат 'DD.MM.YYYY'.
-    Пример: '2018-07-11' → '11.07.2018'
+    Принимает на вход строку с датой в формате "ГГГГ-ММ-ДДTЧЧ:ММ:СС.ffffff" (ISO формат).
+    Где:
+      - ГГГГ — год
+      - ММ — месяц
+      - ДД — день
+      - T — указание начала времени, просто маркер-разделитель.
+      - ЧЧ — часы
+      - ММ — минуты
+      - СС — секунды
+      - ffffff — микросекунды
+    Возвращает строку с датой в формате "ДД.ММ.ГГГГ".
+
+    :param date_iso: Строка с датой в формате "ГГГГ-ММ-ДДTЧЧ:ММ:СС.ffffff".
+    :return: Строка с датой в формате "ДД.ММ.ГГГГ".
     """
-    try:
-        date_obj = datetime.strptime(date_str, "%Y-%m-%d")
-        return date_obj.strftime("%d.%m.%Y")
-    except ValueError:
-        raise ValueError("Некорректный формат даты. Ожидается 'YYYY-MM-DD'")
+
+    date = datetime.fromisoformat(date_iso)
+    return date.strftime("%d.%m.%Y")
+
+
+# if __name__ == "__main__":
+#     print(mask_account_card("Maestro 1596837868701959"))
+#     print(mask_account_card("Maestro 1596837868701959"))
+#     print(get_date("2023-03-15T14:30:59.123456"))
+#     print(get_date("11.05.2025"))

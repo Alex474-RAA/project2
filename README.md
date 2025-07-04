@@ -41,32 +41,32 @@
 ## Запуск тестов
 
 1. Установите зависимости (если нужно)
-pip install pytest
+'pip install pytest'
 
 2. Запустите все тесты
-pytest tests/
+'pytest tests/'
 
 3. Запуск конкретного теста
-pytest tests/test_masks.py
+'pytest tests/test_masks.py'
 
 ## Покрытие тестами
 
 1. Для генерации отчёта о покрытии:
 
- pip install pytest-cov
- ```
- pytest --cov=src --cov-report=html
+ 'pip install pytest-cov'
+ 
+ 'pytest --cov=src --cov-report=html'
 
  Откройте htmlcov/index.html для просмотра детальной информации.
 ## Установка:
 
 1. Клонируйте репозиторий:
 
-git clone https://github.com/Alex474-RAA/project2.git
+'git clone https://github.com/Alex474-RAA/project2.git'
 
 2. Установите зависимости:
 
-pip install -r requirements.txt
+'pip install -r requirements.txt'
 
 ## Использование:
 

@@ -54,6 +54,7 @@ pytest tests/test_masks.py
 1. Для генерации отчёта о покрытии:
 
  pip install pytest-cov
+ 
  pytest --cov=src --cov-report=html
 
  Откройте htmlcov/index.html для просмотра детальной информации.

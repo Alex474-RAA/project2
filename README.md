@@ -110,7 +110,20 @@ pip install -r требования.txt
     'Visa Platinum 7000792289606361' → 'Visa Platinum 7000 79** **** 6361'
     'Счет 73654108430135874305' → 'Счет **4305'
 6. Преобразует дату из строки в формат 'DD.MM.YYYY'.
-    Пример: '2018-07-11' → '11.07.2018'   
+    Пример: '2018-07-11' → '11.07.2018' 
+7. Модуль `generators`
+    `filter_by_currency(transactions, currency)`
+    Фильтрует транзакции по валюте:
+    usd_transactions = filter_by_currency(transactions, "USD")
+    print(next(usd_transactions))  # Первая USD-транзакция
+8. Модуль `transaction_descriptions(transactions)`
+    Извлекает описания транзакций:
+    descriptions = transaction_descriptions(transactions)
+    print(next(descriptions))  # "Перевод организации"
+9. Модуль `card_number_generator(start, end)`
+    Генерирует номера карт в диапазоне:
+    for card in card_number_generator(1, 5):
+    print(card)  # 0000 0000 0000 0001 ... 0000 0000 0000 0005
 ## Установка:
 
 1. Клонируйте репозиторий:
@@ -140,16 +153,6 @@ pip install -r requirements.txt
 ## Авторы:
 1. Ревякин А.А.
 2. Искусственный Интеллект.
-
-## Лицензия:
-
-Этот проект по [ лицензии MIT ] ( ЛИЦЕНЗИЯ ) .  
-=======
-Для получения дополнительной информации обратитесь к [документации](docs/README.md).
-
-## Авторы:
-1. Ревякинн А.А.
-2. Искусственный Интелект.
 
 ## Лицензия:
 

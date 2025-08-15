@@ -1,5 +1,5 @@
-from typing import List, Dict
 from datetime import datetime
+from typing import Dict, List
 
 
 def filter_by_state(transactions: List[Dict], state: str) -> List[Dict]:
@@ -35,6 +35,7 @@ def filter_by_state(transactions: List[Dict], state: str) -> List[Dict]:
             result_list.append(item)
 
     return result_list
+
 
 def sort_by_date(transactions: List[Dict], reverse: bool = True) -> List[Dict]:
     """

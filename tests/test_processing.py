@@ -26,9 +26,9 @@ class TestProcessingFunctions(unittest.TestCase):
         self.assertEqual(len(result), 1)
         self.assertEqual(result[0]["id"], 2)
 
-    #def test_filter_by_state_missing_state(self):
-        #with self.assertRaises(ValueError):
-            #filter_by_state(self.test_transactions[:3], "EXECUTED")
+    # def test_filter_by_state_missing_state(self):
+    # with self.assertRaises(ValueError):
+    # filter_by_state(self.test_transactions[:3], "EXECUTED")
 
     def test_filter_by_state_invalid_input(self):
         with self.assertRaises(TypeError):
@@ -59,4 +59,4 @@ class TestProcessingFunctions(unittest.TestCase):
 
 
 if __name__ == "__main__":
-     run_tests()
+    unittest.main()

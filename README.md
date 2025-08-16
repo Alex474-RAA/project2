@@ -8,8 +8,6 @@
 
 ## Основные функции
 
-### Маскирование данных
-
 ### Маскирование номера карты
     masked_card = mask_account_card("Visa Platinum 8990922113665229")
     print(masked_card)  # Visa Platinum 8990 92** **** 5229

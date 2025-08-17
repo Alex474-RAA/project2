@@ -7,44 +7,44 @@
 ## Основные функции
 
 ### Маскирование номера карты
-    masked_card = mask_account_card("Visa Platinum 8990922113665229")
-    print(masked_card)  # Visa Platinum 8990 92** **** 5229
+    `masked_card = mask_account_card("Visa Platinum 8990922113665229")
+    print(masked_card)  # Visa Platinum 8990 92** **** 5229`
 ### Маскирование номера счёта
-    masked_account = mask_account_card("Счет 73654108430135874305")
-    print(masked_account)  # Счет **4305
+    `masked_account = mask_account_card("Счет 73654108430135874305")
+    print(masked_account)  # Счет **4305`
 
 ### Фильтрация транзакций
-    transactions = [
+    `transactions = [
     {"operationAmount": {"currency": {"code": "USD"}}},
     {"operationAmount": {"currency": {"code": "EUR"}}}
-    ]
+    ]`
 ### Фильтрация по валюте
-    usd_transactions = filter_by_currency(transactions, "USD")
+    `usd_transactions = filter_by_currency(transactions, "USD")
     for transaction in usd_transactions:
-    print(transaction)
+    print(transaction)`
 
 ### Сортировка по дате
 
     1. Сортировка от новых к старым
-    sorted_transactions = sort_by_date(transactions)
+    `sorted_transactions = sort_by_date(transactions)`
     2. Сортировка от старых к новым
-    sorted_asc = sort_by_date(transactions, reverse=False)
+    `sorted_asc = sort_by_date(transactions, reverse=False)`
 
 ### Генерация номеров карт
 
     1. Генерация тестовых номеров карт
-    for card_number in card_number_generator(1, 3):
+    `for card_number in card_number_generator(1, 3):
     print(card_number)
     Вывод:
     0000 0000 0000 0001
     0000 0000 0000 0002
-    0000 0000 0000 0003
+    0000 0000 0000 0003`
 
 ## Запуск тестов
     Для проверки работы модулей используются pytest и unittest:
 
-     pytest tests/
-     python -m unittest tests/test_processing.py
+     `pytest tests/
+     python -m unittest tests/test_processing.py`
 
 ## Требования
     - Python 3.9+

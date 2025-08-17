@@ -45,6 +45,24 @@
     0000 0000 0000 0002
     0000 0000 0000 0003`
 
+### Декоратор log
+
+    Декоратор для логирования вызовов функций. Логирует:
+    - Успешное выполнение функции
+    - Ошибки с типом исключения и входными параметрами
+
+### Пример использования
+
+    `from decorators import log
+
+    @log(filename="operations.log")
+    def process_data(data):
+    return len(data)
+    
+    @log()
+    def risky_operation():
+    raise RuntimeError("Something went wrong")
+
 ## Запуск тестов
 
     Для проверки работы модулей используются pytest и unittest:

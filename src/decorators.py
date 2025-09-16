@@ -1,7 +1,10 @@
 import functools
 
 
-def log(filename=None):
+from typing import Callable, Any, Optional
+
+
+def log(filename: Optional[str] = None) -> Callable:
     """
     Декоратор для логирования вызовов функций и их результатов.
 
@@ -13,9 +16,9 @@ def log(filename=None):
         function: Декорированная функция с логированием.
     """
 
-    def decorator(func):
+    def decorator(func: Callable) -> Callable:
         @functools.wraps(func)
-        def wrapper(*args, **kwargs):
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
             try:
                 result = func(*args, **kwargs)
                 message = f"{func.__name__} ok"
@@ -31,7 +34,7 @@ def log(filename=None):
     return decorator
 
 
-def write_log(message, filename=None):
+def write_log(message: str, filename: Optional[str] = None) -> None:
     """
     Записывает сообщение в файл или выводит в консоль.
 

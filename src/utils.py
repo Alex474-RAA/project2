@@ -1,61 +1,35 @@
-
+import json
 from datetime import datetime
-from .masks import mask_card, mask_account
+from typing import Dict, List
 
 
-def mask_account_card(input_str: str) -> str:
+def get_date(date_iso: str) -> str:
     """
-    Маскирует номер карты/счета в строке формата:
-    'Visa Platinum 7000792289606361' → 'Visa Platinum 7000 79** **** 6361'
-    'Счет 73654108430135874305' → 'Счет **4305'
+    Принимает на вход строку с датой в формате ISO.
+    Возвращает строку с датой в формате "ДД.ММ.ГГГГ".
+
+    :param date_iso: Строка с датой в формате ISO.
+    :return: Строка с датой в формате "ДД.ММ.ГГГГ".
     """
-    parts = input_str.split()
-    number = parts[-1]
-
-    if "счет" in input_str.lower():
-        return ' '.join(parts[:-1] + [mask_account(number)])
-    else:
-        return ' '.join(parts[:-1] + [mask_card(number)])
+    date = datetime.fromisoformat(date_iso)
+    return date.strftime("%d.%m.%Y")
 
 
-def get_date(date_str: str) -> str:
+def load_json_data(file_path: str) -> List[Dict]:
     """
-    Преобразует дату из строки в формат 'DD.MM.YYYY'.
-    Пример: '2018-07-11' → '11.07.2018'
+    Читает JSON-файл и возвращает список словарей с данными о финансовых транзакциях.
+
+    :param file_path: Путь к JSON-файлу.
+    :return: Список словарей с данными о транзакциях или пустой список в случае ошибки.
     """
     try:
-        date_obj = datetime.strptime(date_str, "%Y-%m-%d")
-        return date_obj.strftime("%d.%m.%Y")
-    except ValueError:
-        raise ValueError("Некорректный формат даты. Ожидается 'YYYY-MM-DD'")
+        with open(file_path, 'r', encoding='utf-8') as file:
+            data = json.load(file)
 
-
-from datetime import datetime
-from .masks import mask_card, mask_account
-
-
-def mask_account_card(input_str: str) -> str:
-    """
-    Маскирует номер карты/счета в строке формата:
-    'Visa Platinum 7000792289606361' → 'Visa Platinum 7000 79** **** 6361'
-    'Счет 73654108430135874305' → 'Счет **4305'
-    """
-    parts = input_str.split()
-    number = parts[-1]
-
-    if "счет" in input_str.lower():
-        return ' '.join(parts[:-1] + [mask_account(number)])
-    else:
-        return ' '.join(parts[:-1] + [mask_card(number)])
-
-
-def get_date(date_str: str) -> str:
-    """
-    Преобразует дату из строки в формат 'DD.MM.YYYY'.
-    Пример: '2018-07-11' → '11.07.2018'
-    """
-    try:
-        date_obj = datetime.strptime(date_str, "%Y-%m-%d")
-        return date_obj.strftime("%d.%m.%Y")
-    except ValueError:
-        raise ValueError("Некорректный формат даты. Ожидается 'YYYY-MM-DD'")
+            # Проверяем, что данные являются списком
+            if isinstance(data, list):
+                return data
+            else:
+                return []
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []

@@ -1,7 +1,20 @@
 import functools
+import logging
+import os
+from typing import Any, Callable, Optional
 
+# Создаем папку logs если её нет
+os.makedirs('logs', exist_ok=True)
 
-from typing import Callable, Any, Optional
+# Настройка логера для декораторов
+logger = logging.getLogger('decorators')
+logger.setLevel(logging.DEBUG)
+
+file_handler = logging.FileHandler('logs/decorators.log', mode='w')
+file_handler.setLevel(logging.DEBUG)
+file_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+file_handler.setFormatter(file_formatter)
+logger.addHandler(file_handler)
 
 
 def log(filename: Optional[str] = None) -> Callable:

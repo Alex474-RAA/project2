@@ -5,19 +5,19 @@ from datetime import datetime
 from typing import Dict, List
 
 # Создаем папку logs если её нет
-os.makedirs('logs', exist_ok=True)
+os.makedirs("logs", exist_ok=True)
 
 # Создаем отдельный объект логера для модуля utils
-logger = logging.getLogger('utils')
+logger = logging.getLogger("utils")
 logger.setLevel(logging.DEBUG)  # Уровень не меньше DEBUG
 
 # Настраиваем file_handler для логера модуля utils
-file_handler = logging.FileHandler('logs/utils.log', mode='w')  # mode='w' для перезаписи при каждом запуске
+file_handler = logging.FileHandler("logs/utils.log", mode="w")  # mode='w' для перезаписи при каждом запуске
 file_handler.setLevel(logging.DEBUG)
 
 # Настраиваем file_formatter для логера модуля utils
 # Формат включает метку времени, название модуля, уровень серьезности и сообщение
-file_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+file_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
 # Устанавливаем форматер для логера модуля utils
 file_handler.setFormatter(file_formatter)
@@ -54,7 +54,7 @@ def load_json_data(file_path: str) -> List[Dict]:
     :return: Список словарей с данными о транзакциях или пустой список в случае ошибки.
     """
     try:
-        with open(file_path, 'r', encoding='utf-8') as file:
+        with open(file_path, "r", encoding="utf-8") as file:
             data = json.load(file)
 
             # Проверяем, что данные являются списком

@@ -2,6 +2,7 @@ import unittest
 
 from src.masks import get_mask_account, get_mask_card_number  # Импортируйте ваши функции
 
+
 class TestMaskFunctions(unittest.TestCase):
     # Тесты для маскировки карт
     def test_card_mask_normal(self):

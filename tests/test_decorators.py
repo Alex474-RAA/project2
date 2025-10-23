@@ -34,7 +34,7 @@ def test_log_success_file(tmp_path):
         return a * b
 
     assert multiply(3, 4) == 12
-    with open(logfile, 'r', encoding='utf-8') as f:
+    with open(logfile, "r", encoding="utf-8") as f:
         content = f.read()
     assert "multiply ok" in content
 
@@ -49,7 +49,7 @@ def test_log_error_file(tmp_path):
     with pytest.raises(ValueError):
         fail_func()
 
-    with open(logfile, 'r', encoding='utf-8') as f:
+    with open(logfile, "r", encoding="utf-8") as f:
         content = f.read()
     assert "fail_func error: ValueError" in content
     assert "Inputs: (), {}" in content

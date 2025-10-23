@@ -2,18 +2,18 @@ import logging
 import os
 
 # Создаем папку logs если её нет
-os.makedirs('logs', exist_ok=True)
+os.makedirs("logs", exist_ok=True)
 
 # Настройка логера для модуля masks
-logger = logging.getLogger('masks')
+logger = logging.getLogger("masks")
 logger.setLevel(logging.DEBUG)
 
 # File handler для masks
-file_handler = logging.FileHandler('logs/masks.log', mode='w')
+file_handler = logging.FileHandler("logs/masks.log", mode="w")
 file_handler.setLevel(logging.DEBUG)
 
 # Formatter с меткой времени, именем модуля, уровнем и сообщением
-file_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+file_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 file_handler.setFormatter(file_formatter)
 
 # Добавляем handler к логеру

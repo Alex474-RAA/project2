@@ -12,7 +12,7 @@ logger = logging.getLogger("utils")
 logger.setLevel(logging.DEBUG)  # Уровень не меньше DEBUG
 
 # Настраиваем file_handler для логера модуля utils
-file_handler = logging.FileHandler("logs/utils.log", mode="w")  # mode='w' для перезаписи при каждом запуске
+file_handler = logging.FileHandler("logs/utils.log", mode="w")
 file_handler.setLevel(logging.DEBUG)
 
 # Настраиваем file_formatter для логера модуля utils
@@ -63,7 +63,10 @@ def load_json_data(file_path: str) -> List[Dict]:
                 logger.info(f"Успешно загружено {len(data)} транзакций из файла {file_path}")
                 return data
             else:
-                logger.warning(f"Данные в файле {file_path} не являются списком, возвращен пустой список")
+                logger.warning(
+                    f"Данные в файле {file_path} не являются списком, "
+                    f"возвращен пустой список"
+                )
                 return []
     except (FileNotFoundError, json.JSONDecodeError) as e:
         # Логирование ошибочного случая с уровнем не ниже ERROR

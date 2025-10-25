@@ -38,7 +38,8 @@ def log(filename: Optional[str] = None) -> Callable:
                 write_log(message, filename)
                 return result
             except Exception as e:
-                error_message = f"{func.__name__} error: {type(e).__name__}. Inputs: {args}, {kwargs}"
+                error_message = (f"{func.__name__} error: {type(e).__name__}. "
+                                 f"Inputs: {args}, {kwargs}")
                 write_log(error_message, filename)
                 raise e
 

@@ -1,13 +1,13 @@
 import os
 import sys
 import unittest
-from unittest.mock import  patch
+from unittest.mock import patch
 
 import pandas as pd
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../src")))
+from src.file_reader import read_csv_file, read_excel_file
 
-from file_reader import read_csv_file, read_excel_file
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../src")))
 
 
 class TestFileReader(unittest.TestCase):

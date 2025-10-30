@@ -97,7 +97,7 @@ class TestFileReader(unittest.TestCase):
         with self.assertRaises(Exception) as context:
             read_csv_file("data/corrupted.csv")
 
-        self.assertIn("Ошибка чтения CSV файла", str(context.exception))
+        self.assertEqual("Read error", str(context.exception))
 
     @patch("pandas.read_excel")
     @patch("os.path.exists")
@@ -109,7 +109,7 @@ class TestFileReader(unittest.TestCase):
         with self.assertRaises(Exception) as context:
             read_excel_file("data/corrupted.xlsx")
 
-        self.assertIn("Ошибка чтения Excel файла", str(context.exception))
+        self.assertEqual("Read error", str(context.exception))
 
 
 if __name__ == "__main__":

@@ -52,7 +52,7 @@ def read_csv_file(file_path: str) -> List[Dict]:
     except Exception as e:
         error_msg = f"Ошибка чтения CSV файла {file_path}: {str(e)}"
         logger.error(error_msg)
-        raise Exception(error_msg)
+        raise  # Просто перебрасываем оригинальное исключение
 
 
 def read_excel_file(file_path: str) -> List[Dict]:
@@ -89,7 +89,7 @@ def read_excel_file(file_path: str) -> List[Dict]:
     except Exception as e:
         error_msg = f"Ошибка чтения Excel файла {file_path}: {str(e)}"
         logger.error(error_msg)
-        raise Exception(error_msg)
+        raise  # Просто перебрасываем оригинальное исключение
 
 
 def read_transactions(file_path: str) -> list[dict]:
@@ -104,12 +104,12 @@ def read_transactions(file_path: str) -> list[dict]:
     """
     file_ext = os.path.splitext(file_path)[1].lower()
 
-    if file_ext == '.json':
+    if file_ext == ".json":
         # Здесь будет чтение JSON
         return []
-    elif file_ext == '.csv':
+    elif file_ext == ".csv":
         return read_csv_file(file_path)
-    elif file_ext in ['.xlsx', '.xls']:
+    elif file_ext in [".xlsx", ".xls"]:
         return read_excel_file(file_path)
     else:
         raise ValueError(f"Неподдерживаемый формат: {file_ext}")

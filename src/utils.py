@@ -63,10 +63,7 @@ def load_json_data(file_path: str) -> List[Dict]:
                 logger.info(f"Успешно загружено {len(data)} транзакций из файла {file_path}")
                 return data
             else:
-                logger.warning(
-                    f"Данные в файле {file_path} не являются списком, "
-                    f"возвращен пустой список"
-                )
+                logger.warning(f"Данные в файле {file_path} не являются списком, " f"возвращен пустой список")
                 return []
     except (FileNotFoundError, json.JSONDecodeError) as e:
         # Логирование ошибочного случая с уровнем не ниже ERROR

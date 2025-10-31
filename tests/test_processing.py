@@ -1,6 +1,7 @@
 import unittest
-from datetime import datetime
+
 from src.processing import filter_by_state, sort_by_date
+
 
 class TestProcessingFunctions(unittest.TestCase):
     def setUp(self):
@@ -61,7 +62,7 @@ class TestProcessingFunctions(unittest.TestCase):
         test_data = [
             {"id": 1, "date": "2023-01-01"},
             {"id": 2, "date": "invalid-date"},
-            {"id": 3}  # Полностью отсутствует дата
+            {"id": 3},  # Полностью отсутствует дата
         ]
         result = sort_by_date(test_data)
         self.assertEqual([t["id"] for t in result], [1, 2, 3])
@@ -76,10 +77,7 @@ class TestProcessingFunctions(unittest.TestCase):
         self.assertEqual(result, test_data)
 
     def test_sort_by_date_identical_dates(self):
-        test_data = [
-            {"id": 1, "date": "2023-01-01"},
-            {"id": 2, "date": "2023-01-01"}
-        ]
+        test_data = [{"id": 1, "date": "2023-01-01"}, {"id": 2, "date": "2023-01-01"}]
         result = sort_by_date(test_data)
         self.assertEqual(len(result), 2)
         self.assertEqual([t["id"] for t in result], [1, 2])
@@ -87,10 +85,7 @@ class TestProcessingFunctions(unittest.TestCase):
     # Тесты для покрытия обработки исключений
     def test_sort_by_date_invalid_date_format(self):
         """Тест невалидного строкового формата даты"""
-        test_data = [
-            {"id": 1, "date": "2023-01-01"},
-            {"id": 2, "date": "неправильный-формат-даты"}
-        ]
+        test_data = [{"id": 1, "date": "2023-01-01"}, {"id": 2, "date": "неправильный-формат-даты"}]
         result = sort_by_date(test_data)
         # Проверяем что валидная дата идет первой
         self.assertEqual(result[0]["id"], 1)
@@ -102,7 +97,7 @@ class TestProcessingFunctions(unittest.TestCase):
             {"id": 1, "date": 20230101},  # Число вместо строки
             {"id": 2, "date": {"day": 1, "month": 1, "year": 2023}},  # Словарь
             {"id": 3, "date": ["2023", "01", "01"]},  # Список
-            {"id": 4, "date": "2023-01-01"}  # Валидная дата
+            {"id": 4, "date": "2023-01-01"},  # Валидная дата
         ]
         result = sort_by_date(test_data)
         # Валидная дата должна быть первой
@@ -114,10 +109,7 @@ class TestProcessingFunctions(unittest.TestCase):
 
     def test_sort_by_date_none_value(self):
         """Тест None значения в поле даты"""
-        test_data = [
-            {"id": 1, "date": None},
-            {"id": 2, "date": "2023-01-01"}
-        ]
+        test_data = [{"id": 1, "date": None}, {"id": 2, "date": "2023-01-01"}]
         result = sort_by_date(test_data)
         self.assertEqual(result[0]["id"], 2)
         self.assertEqual(result[1]["id"], 1)
@@ -129,7 +121,7 @@ class TestProcessingFunctions(unittest.TestCase):
             {"id": 2, "date": "2024-01-01"},
             {"id": 3, "date": "2023-01-01"},
             {"id": 4},  # Нет даты
-            {"id": 5, "date": 12345}
+            {"id": 5, "date": 12345},
         ]
         result = sort_by_date(test_data)
         # Валидные даты в порядке убывания
@@ -139,6 +131,7 @@ class TestProcessingFunctions(unittest.TestCase):
         self.assertEqual(result[2]["id"], 1)
         self.assertEqual(result[3]["id"], 4)
         self.assertEqual(result[4]["id"], 5)
+
 
 if __name__ == "__main__":
     unittest.main()

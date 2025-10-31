@@ -2,13 +2,13 @@ from datetime import datetime
 from typing import Dict, List
 
 
-def filter_by_state(transactions: List[Dict], state: str) -> List[Dict]:
+def filter_by_state(transactions: List[Dict], state: str = "EXECUTED") -> List[Dict]:
     """
     Фильтрует список транзакций по значению ключа 'state'.
 
     Параметры:
         transactions: Список словарей с транзакциями
-        state: Значение для фильтрации (обязательный параметр)
+        state: Значение для фильтрации (по умолчанию "EXECUTED")
 
     Возвращает:
         Отфильтрованный список транзакций, где state совпадает с заданным
@@ -54,7 +54,7 @@ def sort_by_date(transactions: List[Dict], reverse: bool = True) -> List[Dict]:
         [{'date': '2024-01-01'}, {'date': '2023-01-01'}]
     """
 
-    def get_date(item):
+    def get_date(item: Dict) -> datetime:
         date_str = item.get("date", "")
         try:
             return datetime.strptime(date_str, "%Y-%m-%d")

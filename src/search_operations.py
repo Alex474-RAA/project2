@@ -1,6 +1,6 @@
 import re
 from collections import Counter
-from typing import List, Dict
+from typing import Dict, List
 
 
 def process_bank_search(data: List[Dict], search: str) -> List[Dict]:
@@ -16,10 +16,10 @@ def process_bank_search(data: List[Dict], search: str) -> List[Dict]:
     """
     try:
         pattern = re.compile(search, re.IGNORECASE)
-        return [op for op in data if pattern.search(op.get('description', ''))]
+        return [op for op in data if pattern.search(op.get("description", ""))]
     except re.error:
         # Если некорректное регулярное выражение, ищем как обычную строку
-        return [op for op in data if search.lower() in op.get('description', '').lower()]
+        return [op for op in data if search.lower() in op.get("description", "").lower()]
 
 
 def process_bank_operations(data: List[Dict], categories: List[str]) -> Dict[str, int]:
@@ -36,7 +36,7 @@ def process_bank_operations(data: List[Dict], categories: List[str]) -> Dict[str
     # Используем Counter как требуется в задании
     all_descriptions = []
     for op in data:
-        description = op.get('description', '').lower()
+        description = op.get("description", "").lower()
         all_descriptions.append(description)
 
     # Создаем счетчик для всех описаний
@@ -46,10 +46,7 @@ def process_bank_operations(data: List[Dict], categories: List[str]) -> Dict[str
     category_counts = {}
     for category in categories:
         category_lower = category.lower()
-        count = sum(
-            count for desc, count in description_counter.items()
-            if category_lower in desc
-        )
+        count = sum(count for desc, count in description_counter.items() if category_lower in desc)
         category_counts[category] = count
 
     return category_counts

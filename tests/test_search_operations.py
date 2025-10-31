@@ -1,5 +1,6 @@
 import pytest
-from src.search_operations import process_bank_search, process_bank_operations
+
+from src.search_operations import process_bank_operations, process_bank_search
 
 
 class TestSearchOperations:
@@ -8,30 +9,10 @@ class TestSearchOperations:
     @pytest.fixture
     def sample_transactions(self):
         return [
-            {
-                "id": 1,
-                "description": "Перевод организации",
-                "state": "EXECUTED",
-                "date": "2023-01-01"
-            },
-            {
-                "id": 2,
-                "description": "Открытие вклада",
-                "state": "EXECUTED",
-                "date": "2023-01-02"
-            },
-            {
-                "id": 3,
-                "description": "Перевод с карты на карту",
-                "state": "CANCELED",
-                "date": "2023-01-03"
-            },
-            {
-                "id": 4,
-                "description": "Оплата услуг",
-                "state": "EXECUTED",
-                "date": "2023-01-04"
-            }
+            {"id": 1, "description": "Перевод организации", "state": "EXECUTED", "date": "2023-01-01"},
+            {"id": 2, "description": "Открытие вклада", "state": "EXECUTED", "date": "2023-01-02"},
+            {"id": 3, "description": "Перевод с карты на карту", "state": "CANCELED", "date": "2023-01-03"},
+            {"id": 4, "description": "Оплата услуг", "state": "EXECUTED", "date": "2023-01-04"},
         ]
 
     def test_process_bank_search_found(self, sample_transactions):
@@ -58,8 +39,7 @@ class TestSearchOperations:
     def test_process_bank_operations_multiple_categories(self, sample_transactions):
         """Тест подсчета операций для нескольких категорий"""
         result = process_bank_operations(
-            sample_transactions,
-            ["Перевод", "Вклад", "Оплата"]  # Изменили "Услуги" на "Оплата"
+            sample_transactions, ["Перевод", "Вклад", "Оплата"]  # Изменили "Услуги" на "Оплата"
         )
         expected = {"Перевод": 2, "Вклад": 1, "Оплата": 1}
         assert result == expected

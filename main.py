@@ -1,8 +1,35 @@
 from src.masks import get_mask_account, get_mask_card_number
 from src.processing import filter_by_state, sort_by_date
+from src.interactive_menu import run_interactive_menu
 
-# Маска
-if __name__ == "__main__":
+
+def main():
+    """Основная функция программы с двумя режимами работы"""
+    while True:
+        print("\n" + "=" * 50)
+        print("ГЛАВНОЕ МЕНЮ")
+        print("=" * 50)
+        print("1. Демонстрация функций (старый режим)")
+        print("2. Интерактивная работа с транзакциями (новый режим)")
+        print("3. Выйти")
+
+        choice = input("Выберите режим работы: ").strip()
+
+        if choice == "1":
+            # Старая логика
+            demo_old_functions()
+        elif choice == "2":
+            # Новая логика
+            run_interactive_menu()
+        elif choice == "3":
+            print("До свидания!")
+            break
+        else:
+            print("Неверный выбор. Попробуйте снова.")
+
+
+def demo_old_functions():
+    """Демонстрация старых функций """
     # Пример использования маскировки номера карты
     print(get_mask_card_number("7000792289606361"))  # Вывод: 7000 79** **** 6361
 
@@ -24,8 +51,6 @@ if __name__ == "__main__":
     # Фильтрация по другому состоянию
     pending = filter_by_state(transactions, "PENDING")
     print("PENDING:", pending)
-
-    # Фильтация по убыванию и возростанию
 
     # Тестовые данные
     transactions = [
@@ -49,3 +74,7 @@ if __name__ == "__main__":
     print("\nСтарые EXECUTED транзакции сначала:")
     for t in oldest_first:
         print(f"{t['date']} (ID: {t['id']})")
+
+
+if __name__ == "__main__":
+    main()
